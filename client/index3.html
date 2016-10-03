@@ -1,0 +1,91 @@
+<!doctype html>
+<html ng-app ="todoApp" ng-cloak>
+<!-- ng-init -->
+  <head>
+    <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <style>
+    [ng\:cloak],[ng-cloak], .ng-cloak{
+      display:none;
+    }
+    </style>
+  </head>
+  <body>
+    <h2>Todo</h2>
+    <div ng-controller="ctrl1">
+      <!-- ng-model used to access input value using scope -->
+      <input type="text" ng-model="first" />
+      <input type="text" ng-model="second" />
+      <button ng-click="updateValue()">sum</button>
+
+      <p>{{first}}</p> <!-- can use data-ng-bind="first"  -->
+      <p><span data-ng-bind="second"></span></p>
+      <p>{{calculation}}</p>
+    </div>
+    <hr>
+    <!--    ng-repeat         -->
+    <div ng-controller="ctrl2">
+      <ol>
+        <li>{{groceries[0].item}}</li>
+      </ol>
+      <ol start="2">
+        <li ng-repeat="grocery in groceries" ng-if="$index>0">
+          {{grocery.item}}
+        </li>
+      </ol>
+      <table>
+        <tr ng-repeat-start="grocery in groceries">
+          <td>{{grocery.item}}</td>
+          <tr ng-repeat-end>
+            <td>{{grocery.purchased}}</td>
+          </tr>
+      </table>
+      <label>change 1st item</label>
+      <input ng-model="groceries[0].item"/>
+    </div>
+    <hr>
+    <!-- checkbox          -->
+    <div ng-controller="ctrl3">
+      <input type="checkbox" ng-model="showList">
+      <ng-include src="getList()"></ng-include>
+    </div>
+    <hr>
+    <!-- switch case -->
+    <div>
+      <label>Type a number
+        <input type="text" ng-model="sumno"/>
+      </label>
+      <div ng-switch="sumno">
+        <p ng-switch-when="1">entered 1</p>
+        <p ng-switch-when="2">entered 2</p>
+        <p ng-switch-default="1">other no</p>
+      </div>
+    </div>
+    <hr>
+    <!-- events -->
+    <div ng-controller="ctrl4">
+      <input ng-blur="blur=blur+1"
+      ng-keydown="keydown($event)"/>
+      <h4>Blur events= {{blur}} </h4>
+      <h4>key pressed= {{kdkey}}</h4>
+    </div>
+    <hr>
+    <!-- disable button   -->
+    <div >
+      <p>
+        <button ng-disabled="disBt">Button</button>
+      </p>
+
+      <p>
+        <input type="checkbox" ng-model="disBt"/>disable?
+      </p>
+
+    </div>
+    <hr>
+    <p>5+5={{5+5}}</p>
+
+    <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+  </body>
+</html>
